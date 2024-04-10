@@ -21,3 +21,6 @@ variable "environment" {
 variable "zone_name" {
   default = "bkdevops.online"
 }
+variable app_version {
+  
+}
