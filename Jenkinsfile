@@ -6,7 +6,7 @@ pipeline {
     }
     // environment { 
     //     packageVersion = ''
-    //     nexusURL = '172.31.37.174:8081'
+    //     nexusURL = '172.31.29.224:8081'
     // }
     options {
         timeout(time: 1, unit: 'HOURS')
@@ -43,14 +43,14 @@ pipeline {
                 """
             }
         }
-        stage('Apply') { 
-            steps {
-                sh """
-                    cd terraform
-                    terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
-                """
-            }
-        }
+        // stage('Apply') { 
+        //     steps {
+        //         sh """
+        //             cd terraform
+        //             terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
+        //         """
+        //     }
+        // }
         
     }
     //post build
