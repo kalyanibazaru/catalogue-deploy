@@ -6,50 +6,26 @@ pipeline {
     }
     // environment { 
     //     packageVersion = ''
-    //     nexusURL = '172.31.29.224:8081'
+    //     nexusURL = '172.31.29.245:8081'
     // }
     options {
+        ansiColor('xterm')
         timeout(time: 1, unit: 'HOURS')
         disableConcurrentBuilds()
     }
     parameters {
-        string(name: 'version', defaultValue: '', description: 'what is the artifact version?')
-        string(name: 'environment', defaultValue: 'dev', description: 'what is the environment?')
+        string(name: 'version', defaultValue: '1.0.0', description: 'What is the artifact version?')
+        string(name: 'environment', defaultValue: 'dev', description: 'What is the environment?')
     }
     //build
     stages {
         stage('Print version') { 
             steps {
                 sh """
-                    echo  "version: ${params.version}"
-                    echo  "version: ${params.environment}"
+                    echo "version: ${params.version}"
+                    echo "version: ${params.environment}"
                 """
-            }
-        }
-    
-        stage('Init') { 
-            steps {
-                sh """
-                    cd terraform
-                    terraform init --backend-config=${params.environment}/backend.tf -reconfigure
-                """
-            }
-        }
-        stage('Plan') { 
-            steps {
-                sh """
-                    cd terraform
-                    terraform plan -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}"
-                """
-            }
-        }
-        stage('Apply') { 
-            steps {
-                sh """
-                    cd terraform
-                    terraform apply -var-file=${params.environment}/${params.environment}.tfvars -var="app_version=${params.version}" -auto-approve
-                """
-            }
+           }
         }
     }
     //post build
