@@ -27,8 +27,6 @@ pipeline {
                 """
            }
         }
-    }
-    stages {
         stage('Init') { 
             steps {
                 sh """
