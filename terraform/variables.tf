@@ -7,13 +7,15 @@ variable "common_tags" {
 }
 
 variable "tags" {
-    default = {
-      Component = "catalogue"
-    }
+  default = {
+    Component = "catalogue"
+  }
 }
+
 variable "project_name" {
   default = "roboshop"
 }
+
 variable "environment" {
   default = "dev"
 }
@@ -21,6 +23,7 @@ variable "environment" {
 variable "zone_name" {
   default = "bkdevops.online"
 }
+
 variable app_version {
   
 }
